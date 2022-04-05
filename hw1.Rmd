@@ -1,8 +1,10 @@
 ---
 title: "131hw1"
-name: "john wei 3814142"
-output: html_document
+name: john wei 3814142
 date: '2022-04-04'
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 Questions:
@@ -25,7 +27,7 @@ The bias variance tradeoff (truncating certain predictors, for example) relates 
 The second question is inferential as it tests the theory if likelihood of voting will change or not, and if so, for the better or worse if there was personal contact, and states the relationship between the outcome and predictor.
 
 Loading packages
-```
+```{r}
 library(tidyverse)
 library(ggplot2)
 data(mpg)
@@ -35,46 +37,47 @@ mpg
 Exercises:
 1.
 Solution
-```
+```{r}
 hist(mpg$hwy)
 ```
 By creating a histogram of hwy, we see the ranges of mpg (in ranges of 5) of different cars in mpg data set as well as their frequencies in that range.
 
 2.
 Solution
-```
+```{r}
 plot(mpg$hwy, mpg$cty)
 ```
 There is a linear relationship between mpg in the city and mpg in the highway. This means that if a car gets low/high mpg in the city, it will also get relatively low/high mpg in the highway.
 
 3.
 Solution
-```
+```{r}
 ggplot(mpg, aes(fct_infreq(manufacturer), fill = class)) + geom_bar() + coord_flip()
 ```
 Dodge produced the most different type of cars; Lincoln produced the least.
 
 4.
 Solution
-```
+```{r}
 boxplot(hwy ~ cyl, data=mpg)
 ```
 There seems to be a pattern where the higher number of cylinders, the lower MPG a car gets in the highway.
 
 5.
 Installing packages 
-```
-install.packages("corrplot")
+```{r}
 library(corrplot)
 ```
 
-Solution
-```
+Solution [I omitted any character variables as corrplot accepts only numeric vectors]
+```{r}
 df = subset(mpg, select = -c(manufacturer,model,trans,drv,fl,class) )
 head(df)
 M = cor(df)
 corrplot(M, type = 'lower')
 ```
+
+
 
 There is positive correlation between: city mpg and highway mpg, cylinder and year (on a small scale), year and displacement (on a small scale), cylinders and displacement.
 
@@ -105,5 +108,8 @@ git push -u origin master
 ```
 
 
-
+```
+install.packages('tinytex')
+tinytex::install_tinytex()
+```
 
